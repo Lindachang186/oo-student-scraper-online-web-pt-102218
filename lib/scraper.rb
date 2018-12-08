@@ -40,14 +40,16 @@ class Scraper
           scraped_students[:linkedin] = link.attr('href')
         elsif link.attr('href').include?('twitter')
           scraped_students[:twitter] = link.attr('href')
-        else 
+        else
           scraped_students[:blog] = link.attr('href')
         end
       end
     end
 
     html.css('div.description-holder').each do |about|
+      if about.css('p').text != ''
       scraped_students[:bio] = about.css('p').text
+      end
     end
 
 
